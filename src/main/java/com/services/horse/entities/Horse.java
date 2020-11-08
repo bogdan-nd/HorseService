@@ -2,19 +2,20 @@ package com.services.horse.entities;
 
 import com.services.horse.enums.HorsemanStatus;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Data
 @Entity
-@Table(name="horses")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Horse {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String name;
     private UUID ownerId;

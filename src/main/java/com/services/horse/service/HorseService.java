@@ -39,7 +39,7 @@ public class HorseService {
         if (horse.isPresent())
             return horse.get();
         else
-            throw new NotFoundException(String.format("Horse with %s id doesn`t exist",id));
+            throw new NotFoundException(String.format("Horse with %s id does not exist",id));
     }
 
     @Transactional
@@ -50,6 +50,20 @@ public class HorseService {
     @Transactional
     public List<Horse> getIllHorses() {
         return repository.getIllHorses();
+    }
+
+    @Transactional
+    public void feedHorse(UUID id) throws NotFoundException {
+        Horse horse = getById(id);
+        horse.eat();
+        saveHorse(horse);
+    }
+
+    @Transactional
+    public void recoverHorse(UUID id) throws NotFoundException {
+        Horse horse = getById(id);
+        horse.getRecovered();
+        saveHorse(horse);
     }
 
 }

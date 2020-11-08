@@ -14,4 +14,5 @@ public interface HorseRepository extends JpaRepository<Horse, UUID> {
 
     @Query(value = "select * from horse where horseman_status = :status", nativeQuery = true)
     List<Horse> getSuitableHorses(@Param("status") int status);
+
 }
