@@ -1,0 +1,30 @@
+version: '3.1'
+services:
+  horseservice:
+    network_mode: bridge
+    container_name: horseservice
+    image: bogdannaida/horse-service:latest
+    build: ./
+    ports:
+      - "8083:8083"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=horseservice
+      - DB_SERVER=postgresqldb-horses
+    links:
+      - postgresqldb-horses
+
+  postgresqldb-horses:
+    network_mode: bridge
+    image: postgres
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=horseservice
+    volumes:
+      - postgres-data-horses:/home/bogdannaida/Projects/IntelliJ-projects/Volumes/
+volumes:
+  postgres-data-horses:
