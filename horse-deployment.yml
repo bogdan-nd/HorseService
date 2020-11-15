@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: horseservice
+  name: horseservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: horseservice
+  strategy: { }
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: horseservice
+    spec:
+      containers:
+        - env:
+            - name: DB_SERVER
+              value: postgresqldb-horses
+            - name: POSTGRES_DB
+              value: horseservice
+            - name: POSTGRES_PASSWORD
+              value: password
+            - name: POSTGRES_USER
+              value: postgres
+          image: bogdannaida/horse-service:latest
+          imagePullPolicy: ""
+          name: horse-service
+          ports:
+            - containerPort: 8087
+          resources: { }
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: postgres-data-horses
+          persistentVolumeClaim:
+            claimName: postgres-data-horses
+status: { }
