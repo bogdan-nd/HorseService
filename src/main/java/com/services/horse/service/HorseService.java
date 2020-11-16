@@ -5,18 +5,19 @@ import com.services.horse.enums.HorsemanStatus;
 import com.services.horse.repo.HorseRepository;
 import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
 @AllArgsConstructor
 public class HorseService {
     private final HorseRepository repository;
+    private final Random random;
 
     @Transactional
     public List<Horse> findAll() {
@@ -24,8 +25,12 @@ public class HorseService {
     }
 
     @Transactional
-    public List<Horse> findSuitable(HorsemanStatus status) {
-        return repository.getSuitableHorses(status.ordinal());
+    public Horse findSuitable(HorsemanStatus status) throws NotFoundException {
+        List<Horse> suitableHorses =  repository.getSuitableHorses(status.ordinal());
+        if (suitableHorses.size() ==0)
+            throw new NotFoundException("There are any suitable horses");
+        return suitableHorses.get(random.nextInt(suitableHorses.size()));
+
     }
 
     @Transactional

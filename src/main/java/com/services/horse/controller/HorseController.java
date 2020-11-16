@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("horses")
+    @RequestMapping("horses")
 @AllArgsConstructor
 public class HorseController {
     private final HorseService horseService;
@@ -25,13 +25,27 @@ public class HorseController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Horse> getHorseById(@PathVariable UUID id) throws NotFoundException {
-        return ResponseEntity.ok(horseService.getById(id));
+    public ResponseEntity<Horse> getHorseById(@PathVariable UUID id){
+        try {
+            return ResponseEntity.ok(horseService.getById(id));
+        }
+        catch (NotFoundException e){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .build();
+        }
     }
 
     @GetMapping("status/{horsemanStatus}")
-    public ResponseEntity<List<Horse>> getSuitableHorses(@PathVariable HorsemanStatus horsemanStatus){
-        return ResponseEntity.ok(horseService.findSuitable(horsemanStatus));
+    public ResponseEntity<Horse> getSuitableHorse(@PathVariable HorsemanStatus horsemanStatus){
+        try {
+            return ResponseEntity.ok(horseService.findSuitable(horsemanStatus));
+        }
+        catch (NotFoundException e){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .build();
+        }
     }
 
     @GetMapping("ill")
