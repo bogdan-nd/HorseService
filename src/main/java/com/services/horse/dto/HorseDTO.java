@@ -1,14 +1,12 @@
-package com.services.horse.RequestDTO;
+package com.services.horse.dto;
 
 import com.services.horse.enums.HorsemanStatus;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import lombok.Data;
 
 import java.util.UUID;
 
 @Data
-public class RequestHorseDTO {
+public class HorseDTO {
     private final String name;
     private final UUID ownerId;
     private final HorsemanStatus horsemanStatus;

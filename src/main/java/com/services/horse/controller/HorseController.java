@@ -1,6 +1,6 @@
 package com.services.horse.controller;
 
-import com.services.horse.RequestDTO.RequestHorseDTO;
+import com.services.horse.dto.HorseDTO;
 import com.services.horse.entities.Horse;
 import com.services.horse.enums.HorsemanStatus;
 import com.services.horse.service.HorseService;
@@ -71,7 +71,7 @@ public class HorseController {
 
 
     @PostMapping
-    public ResponseEntity<Horse> addHorse(@RequestBody RequestHorseDTO horseDTO){
+    public ResponseEntity<Horse> addHorse(@RequestBody HorseDTO horseDTO){
         Horse newHorse = new Horse(horseDTO.getName(), horseDTO.getOwnerId(),
                 horseDTO.getHorsemanStatus(), horseDTO.getPrice());
 
