@@ -10,14 +10,12 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 import java.util.UUID;
 
 @Service
 @AllArgsConstructor
 public class HorseService {
     private final HorseRepository repository;
-    private final Random random;
 
     @Transactional
     public List<Horse> findAll() {
@@ -29,7 +27,7 @@ public class HorseService {
         List<Horse> suitableHorses =  repository.getSuitableHorses(status.ordinal());
         if (suitableHorses.size() ==0)
             throw new NotFoundException("There are any suitable horses");
-        return suitableHorses.get(random.nextInt(suitableHorses.size()));
+        return suitableHorses.get(0);
 
     }
 

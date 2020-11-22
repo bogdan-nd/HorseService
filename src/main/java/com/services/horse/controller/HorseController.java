@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-    @RequestMapping("horses")
+@RequestMapping("horses")
 @AllArgsConstructor
 public class HorseController {
     private final HorseService horseService;
@@ -53,13 +53,11 @@ public class HorseController {
         return ResponseEntity.ok(horseService.getIllHorses());
     }
 
-    @PatchMapping("{horseId}/eat")
+    @PostMapping("{horseId}/eat")
     public ResponseEntity<String> feedHorse(@PathVariable UUID horseId){
         try{
             horseService.feedHorse(horseId);
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(String.format("Horse with %s id was fed",horseId));
+            return ResponseEntity.ok(String.format("Horse with %s id was fed",horseId));
         }
         catch (NotFoundException e) {
             return ResponseEntity
@@ -68,13 +66,11 @@ public class HorseController {
         }
     }
 
-    @PatchMapping("{horseId}/recover")
+    @PostMapping("{horseId}/recover")
     public ResponseEntity<String> recoverHorse(@PathVariable UUID horseId){
         try{
             horseService.recoverHorse(horseId);
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(String.format("Horse with %s id was recovered",horseId));
+            return ResponseEntity.ok(String.format("Horse with %s id was recovered",horseId));
         }
         catch (NotFoundException e) {
             return ResponseEntity
