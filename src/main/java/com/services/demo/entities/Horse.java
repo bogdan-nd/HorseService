@@ -1,10 +1,9 @@
-package com.services.horse.entities;
+package com.services.demo.entities;
 
-import com.services.horse.enums.HorsemanStatus;
+import com.services.demo.enums.HorsemanStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

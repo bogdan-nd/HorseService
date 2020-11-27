@@ -1,9 +1,9 @@
-package com.services.horse.controller;
+package com.services.demo.api.rest;
 
-import com.services.horse.dto.HorseDTO;
-import com.services.horse.entities.Horse;
-import com.services.horse.enums.HorsemanStatus;
-import com.services.horse.service.HorseService;
+import com.services.demo.dto.HorseDTO;
+import com.services.demo.entities.Horse;
+import com.services.demo.enums.HorsemanStatus;
+import com.services.demo.service.HorseService;
 import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -48,11 +48,6 @@ public class HorseController {
         }
     }
 
-    @GetMapping("ill")
-    public ResponseEntity<List<Horse>> getIllHorses(){
-        return ResponseEntity.ok(horseService.getIllHorses());
-    }
-
     @PostMapping("{horseId}/eat")
     public ResponseEntity<String> feedHorse(@PathVariable UUID horseId){
         try{
@@ -79,18 +74,11 @@ public class HorseController {
         }
     }
 
-
     @PostMapping
     public ResponseEntity<Horse> addHorse(@RequestBody HorseDTO horseDTO){
         Horse newHorse = new Horse(horseDTO.getName(), horseDTO.getOwnerId(),
                 horseDTO.getHorsemanStatus(), horseDTO.getPrice());
 
         return ResponseEntity.ok(horseService.saveHorse(newHorse));
-    }
-
-    @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteHorse(@PathVariable UUID id){
-        horseService.deleteById(id);
-        return ResponseEntity.noContent().build();
     }
 }

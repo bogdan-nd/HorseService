@@ -1,8 +1,8 @@
-package com.services.horse.service;
+package com.services.demo.service;
 
-import com.services.horse.entities.Horse;
-import com.services.horse.enums.HorsemanStatus;
-import com.services.horse.repo.HorseRepository;
+import com.services.demo.entities.Horse;
+import com.services.demo.enums.HorsemanStatus;
+import com.services.demo.repo.HorseRepository;
 import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -46,16 +46,6 @@ public class HorseService {
     }
 
     @Transactional
-    public void deleteById(UUID id){
-        repository.deleteById(id);
-    }
-
-    @Transactional
-    public List<Horse> getIllHorses() {
-        return repository.getIllHorses();
-    }
-
-    @Transactional
     public void feedHorse(UUID id) throws NotFoundException {
         Horse horse = getById(id);
         horse.eat();
@@ -68,5 +58,4 @@ public class HorseService {
         horse.getRecovered();
         saveHorse(horse);
     }
-
 }
