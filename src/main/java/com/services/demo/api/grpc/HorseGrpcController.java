@@ -3,12 +3,12 @@ package com.services.demo.api.grpc;
 import com.services.demo.entities.Horse;
 import com.services.demo.enums.HorsemanStatus;
 import com.services.demo.service.HorseService;
+import com.services.grpc.server.horse.*;
+import com.services.grpc.server.horse.HorseServiceGrpc.HorseServiceImplBase;
 import io.grpc.stub.StreamObserver;
 import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import net.devh.boot.grpc.server.service.GrpcService;
-import com.services.grpc.server.horse.HorseServiceGrpc.HorseServiceImplBase;
-import com.services.grpc.server.horse.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @GrpcService
 @AllArgsConstructor
-public class HorseGrpcController extends HorseServiceImplBase{
+public class HorseGrpcController extends HorseServiceImplBase {
     private final HorseService horseService;
 
     @Override
@@ -124,7 +124,7 @@ public class HorseGrpcController extends HorseServiceImplBase{
         UUID ownerId = horse.getOwnerId();
         String ownerIdString = null;
 
-        if(ownerId != null)
+        if (ownerId != null)
             ownerIdString = ownerId.toString();
 
         String horsemanStatus = horse.getHorsemanStatus().toString();
@@ -147,8 +147,8 @@ public class HorseGrpcController extends HorseServiceImplBase{
         String name = protoHorse.getName();
         String ownerIdString = protoHorse.getOwnerId();
         UUID ownerId;
-        if(ownerIdString != null)
-             ownerId = UUID.fromString(ownerIdString);
+        if (ownerIdString != null)
+            ownerId = UUID.fromString(ownerIdString);
         else
             ownerId = null;
 
