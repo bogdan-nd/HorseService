@@ -69,14 +69,15 @@ public class HorseGrpcController extends HorseServiceImplBase {
 
     @Override
     public void addHorse(HorseRequest request, StreamObserver<HorseResponse> responseObserver) {
-        ProtoHorse protoHorse = request.getHorse();
-        Horse horse = createHorseFromProto(protoHorse);
+        UUID ownerId = UUID.fromString(request.getOwnerId());
+        HorsemanStatus status = HorsemanStatus.valueOf(request.getHorsemanStatus());
+        Horse newHorse = new Horse(request.getName(),ownerId, status,request.getPrice());
+        horseService.saveHorse(newHorse);
 
-        Horse createdHorse = horseService.saveHorse(horse);
-        ProtoHorse createdProtoHorse = transformHorseToProto(createdHorse);
+        ProtoHorse createdProtoHorse = transformHorseToProto(newHorse);
 
         HorseResponse response = HorseResponse.newBuilder()
-                .addHorse(protoHorse)
+                .addHorse(createdProtoHorse)
                 .build();
 
         responseObserver.onNext(response);
@@ -141,21 +142,6 @@ public class HorseGrpcController extends HorseServiceImplBase {
                 .build();
 
         return protoHorse;
-    }
-
-    private Horse createHorseFromProto(ProtoHorse protoHorse) {
-        String name = protoHorse.getName();
-        String ownerIdString = protoHorse.getOwnerId();
-        UUID ownerId;
-        if (ownerIdString != null)
-            ownerId = UUID.fromString(ownerIdString);
-        else
-            ownerId = null;
-
-        HorsemanStatus status = HorsemanStatus.valueOf(protoHorse.getHorsemanStatus());
-        int price = protoHorse.getPrice();
-
-        return new Horse(name, ownerId, status, price);
     }
 
     public List<ProtoHorse> transformHorses(List<Horse> horses) {

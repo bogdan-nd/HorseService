@@ -21,7 +21,10 @@ message HorseResponse{
 }
 
 message HorseRequest{
-  ProtoHorse horse = 1;
+  string name = 1;
+  string owner_id = 2;
+  string horsemanStatus = 3;
+  int32 price=4;
 }
 
 message HorsemanRequest{
