@@ -20,7 +20,7 @@ public class HorseGrpcController extends HorseServiceImplBase {
     private final HorseService horseService;
 
     @Override
-    public void getHorses(Empty request, StreamObserver<HorseResponse> responseObserver) {
+    public void getHorses(HorseEmpty request, StreamObserver<HorseResponse> responseObserver) {
         List<Horse> horses = horseService.findAll();
         List<ProtoHorse> protoHorses = transformHorses(horses);
 
