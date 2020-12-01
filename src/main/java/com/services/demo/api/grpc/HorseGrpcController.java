@@ -32,7 +32,7 @@ public class HorseGrpcController extends HorseServiceImplBase {
     }
 
     @Override
-    public void getHorseById(IdRequest request, StreamObserver<HorseResponse> responseObserver) {
+    public void getHorseById(HorseIdRequest request, StreamObserver<HorseResponse> responseObserver) {
         UUID id = UUID.fromString(request.getId());
         HorseResponse response;
         try {
@@ -85,13 +85,13 @@ public class HorseGrpcController extends HorseServiceImplBase {
     }
 
     @Override
-    public void feedHorse(IdRequest request, StreamObserver<StringResponse> responseObserver) {
+    public void feedHorse(HorseIdRequest request, StreamObserver<HorseStringResponse> responseObserver) {
         UUID horseId = UUID.fromString(request.getId());
-        StringResponse response;
+        HorseStringResponse response;
 
         try {
             horseService.feedHorse(horseId);
-            response = StringResponse.newBuilder()
+            response = HorseStringResponse.newBuilder()
                     .setAnswer(String.format("Horse with %s id was fed", horseId))
                     .build();
 
@@ -103,13 +103,13 @@ public class HorseGrpcController extends HorseServiceImplBase {
     }
 
     @Override
-    public void recoverHorse(IdRequest request, StreamObserver<StringResponse> responseObserver) {
+    public void recoverHorse(HorseIdRequest request, StreamObserver<HorseStringResponse> responseObserver) {
         UUID horseId = UUID.fromString(request.getId());
-        StringResponse response;
+        HorseStringResponse response;
 
         try {
             horseService.recoverHorse(horseId);
-            response = StringResponse.newBuilder()
+            response = HorseStringResponse.newBuilder()
                     .setAnswer(String.format("Horse with %s id was recovered", horseId))
                     .build();
 

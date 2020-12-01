@@ -31,19 +31,19 @@ message HorsemanRequest{
   string status = 1;
 }
 
-message IdRequest{
+message HorseIdRequest{
   string id = 1;
 }
 
-message StringResponse{
+message HorseStringResponse{
   string answer = 1;
 }
 
 service HorseService{
   rpc getHorses(HorseEmpty) returns (HorseResponse);
-  rpc getHorseById(IdRequest) returns (HorseResponse);
+  rpc getHorseById(HorseIdRequest) returns (HorseResponse);
   rpc getSuitableHorse(HorsemanRequest) returns (HorseResponse);
   rpc addHorse(HorseRequest) returns (HorseResponse);
-  rpc feedHorse(IdRequest) returns (StringResponse);
-  rpc recoverHorse(IdRequest) returns (StringResponse);
+  rpc feedHorse(HorseIdRequest) returns (HorseStringResponse);
+  rpc recoverHorse(HorseIdRequest) returns (HorseStringResponse);
 }
