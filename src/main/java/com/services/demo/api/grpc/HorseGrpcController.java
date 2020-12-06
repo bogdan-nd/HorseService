@@ -10,6 +10,7 @@ import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import net.devh.boot.grpc.server.service.GrpcService;
 
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -70,6 +71,7 @@ public class HorseGrpcController extends HorseServiceImplBase {
     @Override
     public void addHorse(HorseRequest request, StreamObserver<HorseResponse> responseObserver) {
         UUID ownerId = UUID.fromString(request.getOwnerId());
+
         HorsemanStatus status = HorsemanStatus.valueOf(request.getHorsemanStatus());
         Horse newHorse = new Horse(request.getName(),ownerId, status,request.getPrice());
         horseService.saveHorse(newHorse);
