@@ -1,6 +1,6 @@
-package com.services.demo.dto;
+package com.services.demo.api.rest.dto;
 
-import com.services.demo.enums.HorsemanStatus;
+import com.services.demo.entities.enums.HorsemanStatus;
 import lombok.Data;
 
 import java.util.UUID;

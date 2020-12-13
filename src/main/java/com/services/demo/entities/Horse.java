@@ -1,6 +1,6 @@
 package com.services.demo.entities;
 
-import com.services.demo.enums.HorsemanStatus;
+import com.services.demo.entities.enums.HorsemanStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

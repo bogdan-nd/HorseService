@@ -1,7 +1,7 @@
 package com.services.demo.api.grpc;
 
 import com.services.demo.entities.Horse;
-import com.services.demo.enums.HorsemanStatus;
+import com.services.demo.entities.enums.HorsemanStatus;
 import com.services.demo.service.HorseService;
 import com.services.grpc.server.horse.*;
 import com.services.grpc.server.horse.HorseServiceGrpc.HorseServiceImplBase;
@@ -10,7 +10,6 @@ import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import net.devh.boot.grpc.server.service.GrpcService;
 
-import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

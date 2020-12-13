@@ -1,7 +1,7 @@
 package com.services.demo.service;
 
 import com.services.demo.entities.Horse;
-import com.services.demo.enums.HorsemanStatus;
+import com.services.demo.entities.enums.HorsemanStatus;
 import com.services.demo.repo.HorseRepository;
 import javassist.NotFoundException;
 import lombok.AllArgsConstructor;

@@ -1,8 +1,8 @@
 package com.services.demo.api.rest;
 
-import com.services.demo.dto.HorseDTO;
+import com.services.demo.api.rest.dto.HorseDTO;
 import com.services.demo.entities.Horse;
-import com.services.demo.enums.HorsemanStatus;
+import com.services.demo.entities.enums.HorsemanStatus;
 import com.services.demo.service.HorseService;
 import javassist.NotFoundException;
 import lombok.AllArgsConstructor;

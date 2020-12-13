@@ -1,4 +1,4 @@
-package com.services.demo.enums;
+package com.services.demo.entities.enums;
 
 public enum HorsemanStatus {
     KID, ADULT, PROFESSIONAL
