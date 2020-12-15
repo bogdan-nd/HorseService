@@ -4,7 +4,7 @@ services:
     network_mode: bridge
     container_name: horseservice
     image: bogdannaida/horse-service:latest
-    build: ./
+    build: ..
     ports:
       - "8083:8083"
       - "9090:9090"
