@@ -1,5 +1,6 @@
 package com.services.demo.rabbitmq;
 
+import com.services.demo.api.rest.dto.HorseDTO;
 import com.services.demo.entities.Horse;
 import com.services.demo.service.HorseService;
 import lombok.AllArgsConstructor;
@@ -12,7 +13,8 @@ public class Server {
     private final HorseService horseService;
 
     @RabbitListener(queues = "${rabbitmq.queue}")
-    public void addHorse(Horse horse){
+    public void addHorse(HorseDTO horseDTO){
+        Horse horse = new Horse(horseDTO.getName(),horseDTO.getOwnerId(),horseDTO.getHorsemanStatus(),horseDTO.getPrice());
         horseService.saveHorse(horse);
     }
 }
